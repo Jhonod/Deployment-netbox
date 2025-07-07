@@ -2,7 +2,8 @@ name: Build & Deploy NetBox via Terraform
 
 on:
   push:
-    branches: [main]
+    branches: 
+      - main
 
 env:
   PROJECT_ID: arboreal-cosmos-440011-r8
@@ -22,7 +23,18 @@ jobs:
       uses: google-github-actions/auth@v2
       with:
         credentials_json: '${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}'
+        
+    - name: Terraform Init
+      run: terraform init
+      working-directory: ./terraform
 
+    - name: Terraform Plan
+      run: terraform plan -out=tfplan
+      working-directory: ./terraform
+
+    - name: Terraform Apply
+      run: terraform apply -auto-approve tfplan
+      working-directory: ./terraform
     - name: Configure Docker for Artifact Registry
       run: gcloud auth configure-docker $REGION-docker.pkg.dev --quiet
 
@@ -37,14 +49,4 @@ jobs:
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v3
 
-    - name: Terraform Init
-      run: terraform init
-      working-directory: ./terraform
-
-    - name: Terraform Plan
-      run: terraform plan -out=tfplan
-      working-directory: ./terraform
-
-    - name: Terraform Apply
-      run: terraform apply -auto-approve tfplan
-      working-directory: ./terraform
+    
