@@ -3,11 +3,13 @@ provider "google" {
   region  = var.region
 }
 
-resource "google_artifact_registry_repository" "netbox_repo" {
-  location      = var.region
-  repository_id = var.repository_id
+resource "google_artifact_registry_repository" "registry" {
+  provider      = google
+  location      = "asia-southeast2"
+  repository_id = "netbox-registry"
   description   = "Artifact Registry for NetBox"
   format        = "DOCKER"
+  project       = "arboreal-cosmos-440011-r8"
 }
 
 resource "google_cloud_run_service" "netbox" {
