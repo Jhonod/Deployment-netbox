@@ -9,10 +9,10 @@ variable "region" {
 
 variable "repository_id" {
   type    = string
-  default = "netbox-registry"
+  default = "box-registry"
 }
 
 variable "image_name" {
   type    = string
-  default = "netbox"
+  default = "net-box"
 }

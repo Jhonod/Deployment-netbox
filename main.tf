@@ -10,8 +10,8 @@ resource "google_artifact_registry_repository" "registry" {
   format        = "DOCKER"
 }
 
-resource "google_cloud_run_service" "netbox" {
-  name     = "netbox"
+resource "google_cloud_run_service" "net-box" {
+  name     = "net-box"
   location = var.region
 
   template {
