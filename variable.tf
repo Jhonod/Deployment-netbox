@@ -1,18 +1,19 @@
 variable "project_id" {
-  type = string
+  description = "GCP Project ID"
+  type        = string
 }
 
 variable "region" {
-  type    = string
-  default = "asia-southeast2"
+  description = "GCP region where the service will run"
+  type        = string
 }
 
 variable "repository_id" {
-  type    = string
-  default = "box-registry"
+  description = "Name of the Artifact Registry repository"
+  type        = string
 }
 
-variable "image_name" {
-  type    = string
-  default = "net-box"
+variable "service_name" {
+  description = "Name of the Cloud Run service already deployed"
+  type        = string
 }
