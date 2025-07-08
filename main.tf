@@ -10,24 +10,9 @@ resource "google_artifact_registry_repository" "registry" {
   format        = "DOCKER"
 }
 
-resource "google_cloud_run_service" "net-box" {
-  name     = "net-box"
+data "google_cloud_run_service" "net-box" {
+  name     = var.service_name  # contoh: "netbox"
   location = var.region
-
-  template {
-    spec {
-      containers {
-        image = "${var.region}-docker.pkg.dev/${var.project_id}/${var.repository_id}/${var.image_name}:latest"
-        ports {
-          container_port = 8080
-        }
-      }
-    }
-  }
- traffic {
-    percent         = 100
-    latest_revision = true
-  }
 }
 
 resource "google_cloud_run_service_iam_member" "all_users" {
