@@ -13,7 +13,7 @@ variable "repository_id" {
   type        = string
 }
 
-variable "service_name" {
+variable "image_name" {
   description = "Name of the Cloud Run service already deployed"
   type        = string
 }

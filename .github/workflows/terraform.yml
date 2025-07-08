@@ -9,7 +9,7 @@ env:
   PROJECT_ID: arboreal-cosmos-440011-r8
   REGION: asia-southeast2
   REPOSITORY_ID: box-registry
-  SERVICE_NAME: netbox
+  IMAGE_NAME: netbox
 
 jobs:
   build-and-deploy:
@@ -42,11 +42,11 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_ID/$SERVICE_NAME:latest .
+        docker build -t $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_ID/$IMAGE_NAME:latest .
 
     - name: Push Docker image
       run: |
-        docker push $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_ID/$SERVICE_NAME:latest
+        docker push $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_ID/$IMAGE_NAME:latest
 
     
      
