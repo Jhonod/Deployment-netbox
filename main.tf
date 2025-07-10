@@ -15,9 +15,3 @@ data "google_cloud_run_service" "netbox" {
   location = var.region
 }
 
-resource "google_cloud_run_service_iam_member" "all_users" {
-  location = google_cloud_run_service.netbox.location
-  service  = google_cloud_run_service.netbox.name
-  role     = "roles/run.invoker"
-  member   = "allUsers"
-}
